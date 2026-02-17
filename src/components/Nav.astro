@@ -1,0 +1,20 @@
+---
+interface Props {
+	overlay?: boolean;
+}
+
+const { overlay = false } = Astro.props;
+---
+
+<nav class:list={[
+	"flex items-center justify-between px-6 md:px-12 py-4 text-white z-10",
+	overlay ? "absolute top-0 left-0 w-full" : "bg-[#1a1a2e]",
+]}>
+	<span class="text-lg font-bold">Hometown Insurance</span>
+	<ul class="flex gap-6 list-none m-0 p-0 text-sm">
+		<li><a href="/" class="text-white hover:opacity-75 no-underline">Home</a></li>
+		<li><a href="/about" class="text-white hover:opacity-75 no-underline">About</a></li>
+		<li><a href="/services" class="text-white hover:opacity-75 no-underline">Services</a></li>
+		<li><a href="/contact" class="text-white hover:opacity-75 no-underline">Contact</a></li>
+	</ul>
+</nav>
