@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<main>
+		<section class="hero">
+			<h1>Protecting What Matters Most</h1>
+			<p>Your local insurance agency in Bohemia, NY</p>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	main {
+		font-family: system-ui, -apple-system, sans-serif;
+		color: #1a1a2e;
+	}
+
+	.hero {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		min-height: 100vh;
+		text-align: center;
+		padding: 2rem;
+		background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+		color: #ffffff;
+	}
+
+	h1 {
+		font-size: 3rem;
+		font-weight: 700;
+		margin: 0 0 1rem;
+		line-height: 1.2;
+	}
+
+	p {
+		font-size: 1.25rem;
+		margin: 0;
+		opacity: 0.85;
+	}
+
+	@media (max-width: 600px) {
+		h1 {
+			font-size: 2rem;
+		}
+
+		p {
+			font-size: 1rem;
+		}
+	}
+</style>
