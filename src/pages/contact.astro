@@ -249,64 +249,59 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </style>
 
     <script is:inline>
-        document.addEventListener('DOMContentLoaded', function() {
-            var contactForm = document.getElementById('contactForm');
-            var contactFormMsg = document.getElementById('contactFormMsg');
+        var contactForm = document.getElementById('contactForm');
+        var contactFormMsg = document.getElementById('contactFormMsg');
 
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
 
-                    var submitBtn = contactForm.querySelector('button[type="submit"]');
-                    var originalBtnText = submitBtn.textContent;
+                var submitBtn = contactForm.querySelector('button[type="submit"]');
+                var originalBtnText = submitBtn.textContent;
 
-                    // Show sending state
-                    submitBtn.textContent = 'Sending...';
-                    submitBtn.disabled = true;
-                    contactFormMsg.style.display = 'none';
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+                if (contactFormMsg) contactFormMsg.style.display = 'none';
 
-                    // Collect form data
-                    var formData = {
-                        first_name: contactForm.querySelector('input[name="first_name"]').value,
-                        last_name: contactForm.querySelector('input[name="last_name"]').value,
-                        email: contactForm.querySelector('input[name="email"]').value,
-                        phone: contactForm.querySelector('input[name="phone"]').value,
-                        help_type: contactForm.querySelector('select[name="help_type"]').value,
-                        message: contactForm.querySelector('textarea[name="message"]').value,
-                        page: 'contact'
-                    };
+                var formData = {
+                    first_name: contactForm.querySelector('input[name="first_name"]').value,
+                    last_name: contactForm.querySelector('input[name="last_name"]').value,
+                    email: contactForm.querySelector('input[name="email"]').value,
+                    phone: contactForm.querySelector('input[name="phone"]').value,
+                    help_type: contactForm.querySelector('select[name="help_type"]').value,
+                    message: contactForm.querySelector('textarea[name="message"]').value,
+                    page: 'contact'
+                };
 
-                    // Submit to API
-                    fetch('/api/contact', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(formData)
-                    })
-                    .then(function(response) { return response.json(); })
-                    .then(function(data) {
-                        if (data.success) {
-                            contactFormMsg.style.color = '#10b981';
-                            contactFormMsg.textContent = '✓ Your request has been sent! Our team will be in touch shortly.';
-                            contactFormMsg.style.display = 'block';
-                            contactForm.reset();
-                        } else {
-                            contactFormMsg.style.color = '#ef4444';
-                            contactFormMsg.textContent = data.error || 'Something went wrong. Please try again.';
-                            contactFormMsg.style.display = 'block';
-                        }
-                    })
-                    .catch(function() {
-                        contactFormMsg.style.color = '#ef4444';
-                        contactFormMsg.textContent = 'Network error. Please try again.';
+                fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                })
+                .then(function(response) { return response.json(); })
+                .then(function(data) {
+                    if (data.success) {
+                        contactFormMsg.style.color = '#10b981';
+                        contactFormMsg.textContent = '✓ Your message has been sent! Our team will be in touch shortly.';
                         contactFormMsg.style.display = 'block';
-                    })
-                    .finally(function() {
-                        submitBtn.textContent = originalBtnText;
-                        submitBtn.disabled = false;
-                    });
+                        contactForm.reset();
+                    } else {
+                        contactFormMsg.style.color = '#ef4444';
+                        contactFormMsg.textContent = data.error || 'Something went wrong. Please try again.';
+                        contactFormMsg.style.display = 'block';
+                    }
+                })
+                .catch(function() {
+                    contactFormMsg.style.color = '#ef4444';
+                    contactFormMsg.textContent = 'Network error. Please try again.';
+                    contactFormMsg.style.display = 'block';
+                })
+                .finally(function() {
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
                 });
-            }
-        });
+            });
+        }
     </script>
 
 </BaseLayout>
