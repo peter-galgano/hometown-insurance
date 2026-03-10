@@ -169,9 +169,12 @@ const { title, description = 'Hometown Insurance Agency - Protecting what matter
                     <h2>Hometown Monthly Newsletter</h2>
                     <p>Insurance insights and safety tips delivered right to your inbox.</p>
                 </div>
-                <div class="newsletter-form">
-                    <input type="email" placeholder="Your email address">
-                    <button class="btn btn-red">Subscribe Now</button>
+                <div class="newsletter-form-wrap">
+                    <form class="newsletter-form" id="newsletterForm" onsubmit="return handleNewsletter(event)">
+                        <input type="email" id="newsletterEmail" placeholder="Your email address" required>
+                        <button type="submit" class="btn btn-red" id="newsletterBtn">Subscribe Now</button>
+                    </form>
+                    <p id="newsletterMsg" style="display:none; margin-top:10px; font-weight:700;"></p>
                 </div>
             </div>
 
@@ -306,6 +309,45 @@ const { title, description = 'Hometown Insurance Agency - Protecting what matter
                 body.classList.remove('nav-open');
             }
         });
+
+        // Newsletter signup
+        function handleNewsletter(e) {
+            e.preventDefault();
+            var email = document.getElementById('newsletterEmail').value;
+            var btn = document.getElementById('newsletterBtn');
+            var msg = document.getElementById('newsletterMsg');
+            btn.disabled = true;
+            btn.textContent = 'Subscribing...';
+
+            fetch('/api/newsletter', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email })
+            })
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+                if (data.success) {
+                    msg.style.display = 'block';
+                    msg.style.color = '#22c55e';
+                    msg.textContent = '✓ You\'re subscribed! Thank you.';
+                    document.getElementById('newsletterEmail').value = '';
+                } else {
+                    msg.style.display = 'block';
+                    msg.style.color = '#ef4444';
+                    msg.textContent = data.error || 'Something went wrong. Please try again.';
+                }
+                btn.disabled = false;
+                btn.textContent = 'Subscribe Now';
+            })
+            .catch(function() {
+                msg.style.display = 'block';
+                msg.style.color = '#ef4444';
+                msg.textContent = 'Unable to subscribe right now. Please try again later.';
+                btn.disabled = false;
+                btn.textContent = 'Subscribe Now';
+            });
+            return false;
+        }
     </script>
 </body>
 </html>
