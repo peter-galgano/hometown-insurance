@@ -64,19 +64,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         @media (max-width: 992px) {
             .hero-grid, .coverage-layout { grid-template-columns: 1fr; }
             .hero-content { margin-top: 0; }
-            .coverage-layout { gap: 40px; }
-        }
-        @media (max-width: 768px) {
-            .hero-content h1 { font-size: 34px; }
-            .hero-content p { font-size: 17px; }
-            .hero-wrapper { padding: 40px 0 80px 0; }
-            .coverage-section { padding: 50px 0 30px 0; }
-            .special-section { padding: 50px 0; }
-            .dd-section { padding: 20px 0 50px 0; }
-            .dd-card { padding: 25px; }
-        }
-        @media (max-width: 480px) {
-            .hero-content h1 { font-size: 28px; }
         }
     </style>
 
@@ -95,10 +82,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
             <div class="quote-card">
                 <h3>Personal Quote Request</h3>
-                <form>
+                <form id="personalFormTop">
                     <div class="form-group">
                         <label>Insurance Type Interested In</label>
-                        <select required onchange="toggleOtherField(this, 'other_details_top')">
+                        <select name="insurance_type" required onchange="toggleOtherField(this, 'other_details_top')">
                             <option value="" disabled selected>Select an option...</option>
                             <option>Auto Insurance</option>
                             <option>Homeowners Insurance</option>
@@ -115,26 +102,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     <div id="other_details_top" class="other-details-container">
                         <div class="form-group">
                             <label>Please specify:</label>
-                            <input type="text" placeholder="Enter details here">
+                            <input type="text" name="other_details" placeholder="Enter details here">
                         </div>
                     </div>
-                    <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your Name" required></div>
-                    <div class="form-group"><label>Email Address</label><input type="email" placeholder="email@address.com" required></div>
-                    <div class="form-group"><label>Leave a message (optional)</label><textarea rows="2" placeholder="Tell us more..."></textarea></div>
+                    <div class="form-group"><label>Full Name</label><input type="text" name="full_name" placeholder="Your Name" required></div>
+                    <div class="form-group"><label>Email Address</label><input type="email" name="email" placeholder="email@address.com" required></div>
+                    <div class="form-group"><label>Leave a message (optional)</label><textarea name="message" rows="2" placeholder="Tell us more..."></textarea></div>
                     <div class="form-group">
                         <label>How should we contact you?</label>
                         <div class="radio-inline-container">
-                            <label><input type="radio" name="contact_method_top" value="email" checked onchange="toggleCallback('top', false)"> Email</label>
-                            <label><input type="radio" name="contact_method_top" value="phone" onchange="toggleCallback('top', true)"> Callback</label>
+                            <label><input type="radio" name="contact_method" value="email" checked onchange="toggleCallback('top', false)"> Email</label>
+                            <label><input type="radio" name="contact_method" value="phone" onchange="toggleCallback('top', true)"> Callback</label>
                         </div>
                     </div>
                     <div id="callback_fields_top" class="callback-fields">
-                        <div class="form-group"><label>Phone Number</label><input type="tel"></div>
-                        <div class="form-group"><label>Best Day & Time</label><input type="text" placeholder="e.g. Monday Morning"></div>
+                        <div class="form-group"><label>Phone Number</label><input type="tel" name="phone"></div>
+                        <div class="form-group"><label>Best Day & Time</label><input type="text" name="callback_time" placeholder="e.g. Monday Morning"></div>
                     </div>
                     <div class="form-group">
                         <label>How did you hear about us?</label>
-                        <select id="hear_about_top" onchange="toggleHearOther(this, 'hear_other_top')">
+                        <select id="hear_about_top" name="hear_about" onchange="toggleHearOther(this, 'hear_other_top')">
                             <option value="" disabled selected>Please select...</option>
                             <option>Google Search</option>
                             <option>Facebook / Instagram</option>
@@ -147,11 +134,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     <div id="hear_other_top" class="other-details-container">
                         <div class="form-group">
                             <label>Please specify how you heard about us:</label>
-                            <input type="text" placeholder="Tell us how you found us...">
+                            <input type="text" name="hear_other" placeholder="Tell us how you found us...">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-red" style="width: 100%; margin-top: 10px;">Send Request</button>
                 </form>
+                <p id="personalFormTopMsg" style="display:none; margin-top:10px; font-weight:700;"></p>
             </div>
         </section>
     </div>
@@ -295,10 +283,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="container">
             <div class="quote-card" style="max-width: 600px; margin: 0 auto; text-align: left;">
                 <h3>Personal Quote Request</h3>
-                <form>
+                <form id="personalFormBottom">
                     <div class="form-group">
                         <label>What coverage do you need?</label>
-                        <select required onchange="toggleOtherField(this, 'other_details_bottom')">
+                        <select name="insurance_type" required onchange="toggleOtherField(this, 'other_details_bottom')">
                             <option value="" disabled selected>Select an option...</option>
                             <option>Auto & Homeowners Bundle</option>
                             <option>Individual Homeowners</option>
@@ -312,26 +300,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     <div id="other_details_bottom" class="other-details-container">
                         <div class="form-group">
                             <label>Please specify:</label>
-                            <input type="text" placeholder="Enter details here">
+                            <input type="text" name="other_details" placeholder="Enter details here">
                         </div>
                     </div>
-                    <div class="form-group"><label>Your Full Name</label><input type="text" placeholder="Full Name" required></div>
-                    <div class="form-group"><label>Email Address</label><input type="email" placeholder="email@address.com" required></div>
-                    <div class="form-group"><label>Leave a message (optional)</label><textarea rows="2" placeholder="Tell us more..."></textarea></div>
+                    <div class="form-group"><label>Your Full Name</label><input type="text" name="full_name" placeholder="Full Name" required></div>
+                    <div class="form-group"><label>Email Address</label><input type="email" name="email" placeholder="email@address.com" required></div>
+                    <div class="form-group"><label>Leave a message (optional)</label><textarea name="message" rows="2" placeholder="Tell us more..."></textarea></div>
                     <div class="form-group">
                         <label>How should we contact you?</label>
                         <div class="radio-inline-container">
-                            <label><input type="radio" name="contact_method_bot" value="email" checked onchange="toggleCallback('bot', false)"> Email</label>
-                            <label><input type="radio" name="contact_method_bot" value="phone" onchange="toggleCallback('bot', true)"> Callback</label>
+                            <label><input type="radio" name="contact_method" value="email" checked onchange="toggleCallback('bot', false)"> Email</label>
+                            <label><input type="radio" name="contact_method" value="phone" onchange="toggleCallback('bot', true)"> Callback</label>
                         </div>
                     </div>
                     <div id="callback_fields_bot" class="callback-fields">
-                        <div class="form-group"><label>Phone Number</label><input type="tel"></div>
-                        <div class="form-group"><label>Best Day & Time</label><input type="text" placeholder="e.g. Wednesday Mornings"></div>
+                        <div class="form-group"><label>Phone Number</label><input type="tel" name="phone"></div>
+                        <div class="form-group"><label>Best Day & Time</label><input type="text" name="callback_time" placeholder="e.g. Wednesday Mornings"></div>
                     </div>
                     <div class="form-group">
                         <label>How did you hear about us?</label>
-                        <select id="hear_about_bot" onchange="toggleHearOther(this, 'hear_other_bot')">
+                        <select id="hear_about_bot" name="hear_about" onchange="toggleHearOther(this, 'hear_other_bot')">
                             <option value="" disabled selected>Please select...</option>
                             <option>Google Search</option>
                             <option>Facebook / Instagram</option>
@@ -344,11 +332,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     <div id="hear_other_bot" class="other-details-container">
                         <div class="form-group">
                             <label>Please specify how you heard about us:</label>
-                            <input type="text" placeholder="Tell us how you found us...">
+                            <input type="text" name="hear_other" placeholder="Tell us how you found us...">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-red" style="width: 100%; margin-top: 10px;">Send Request</button>
                 </form>
+                <p id="personalFormBottomMsg" style="display:none; margin-top:10px; font-weight:700;"></p>
             </div>
         </div>
     </div>
@@ -360,10 +349,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         function toggleOtherField(selectElement, fieldId) {
             var otherField = document.getElementById(fieldId);
+            var input = otherField.querySelector('input');
             if (selectElement.value === 'Other') {
                 otherField.style.display = 'block';
+                if (input) input.setAttribute('required', 'required');
             } else {
                 otherField.style.display = 'none';
+                if (input) { input.removeAttribute('required'); input.value = ''; }
             }
         }
 
@@ -386,5 +378,74 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             document.querySelectorAll('.accordion-item').forEach(function(el) { el.classList.remove('active'); });
             if (!wasActive) item.classList.add('active');
         }
+
+        function handlePersonalFormSubmit(formId, msgId, position) {
+            var form = document.getElementById(formId);
+            var msg = document.getElementById(msgId);
+            
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    var submitBtn = form.querySelector('button[type="submit"]');
+                    var originalBtnText = submitBtn.textContent;
+
+                    // Show sending state
+                    submitBtn.textContent = 'Sending...';
+                    submitBtn.disabled = true;
+                    msg.style.display = 'none';
+
+                    // Collect form data
+                    var formData = {
+                        insurance_type: form.querySelector('select[name="insurance_type"]').value,
+                        other_details: form.querySelector('input[name="other_details"]') ? form.querySelector('input[name="other_details"]').value : '',
+                        full_name: form.querySelector('input[name="full_name"]').value,
+                        email: form.querySelector('input[name="email"]').value,
+                        message: form.querySelector('textarea[name="message"]').value,
+                        contact_method: form.querySelector('input[name="contact_method"]:checked').value,
+                        phone: form.querySelector('input[name="phone"]') ? form.querySelector('input[name="phone"]').value : '',
+                        callback_time: form.querySelector('input[name="callback_time"]') ? form.querySelector('input[name="callback_time"]').value : '',
+                        hear_about: form.querySelector('select[name="hear_about"]').value,
+                        hear_other: form.querySelector('input[name="hear_other"]') ? form.querySelector('input[name="hear_other"]').value : '',
+                        page: 'personal',
+                        form_position: position
+                    };
+
+                    // Submit to API
+                    fetch('/api/lead', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    })
+                    .then(function(response) { return response.json(); })
+                    .then(function(data) {
+                        if (data.success) {
+                            msg.style.color = '#10b981';
+                            msg.textContent = '✓ Your request has been sent! Our team will be in touch shortly.';
+                            msg.style.display = 'block';
+                            form.reset();
+                        } else {
+                            msg.style.color = '#ef4444';
+                            msg.textContent = data.error || 'Something went wrong. Please try again.';
+                            msg.style.display = 'block';
+                        }
+                    })
+                    .catch(function() {
+                        msg.style.color = '#ef4444';
+                        msg.textContent = 'Network error. Please try again.';
+                        msg.style.display = 'block';
+                    })
+                    .finally(function() {
+                        submitBtn.textContent = originalBtnText;
+                        submitBtn.disabled = false;
+                    });
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            handlePersonalFormSubmit('personalFormTop', 'personalFormTopMsg', 'top');
+            handlePersonalFormSubmit('personalFormBottom', 'personalFormBottomMsg', 'bottom');
+        });
     </script>
 </BaseLayout>

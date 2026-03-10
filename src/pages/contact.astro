@@ -57,32 +57,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     <h2 style="margin-bottom: 10px; font-size: 32px;">Contact an Agent</h2>
                     <p style="margin-bottom: 30px; color: var(--text-gray);">Have a question about home insurance, auto insurance, business insurance, or specialty coverage? Drop us a line below. One of our experienced team members will review your message and respond as soon as possible with the information and guidance you need.</p>
 
-                    <form>
+                    <form id="contactForm">
                         <div class="form-row">
                             <div class="form-group">
                                 <label>First Name</label>
-                                <input type="text" placeholder="John" required>
+                                <input type="text" name="first_name" placeholder="John" required>
                             </div>
                             <div class="form-group">
                                 <label>Last Name</label>
-                                <input type="text" placeholder="Doe" required>
+                                <input type="text" name="last_name" placeholder="Doe" required>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label>Email Address</label>
-                                <input type="email" placeholder="john.doe@email.com" required>
+                                <input type="email" name="email" placeholder="john.doe@email.com" required>
                             </div>
                             <div class="form-group">
                                 <label>Phone Number</label>
-                                <input type="tel" placeholder="(555) 555-5555">
+                                <input type="tel" name="phone" placeholder="(555) 555-5555">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>How can we help?</label>
-                            <select>
+                            <select name="help_type">
                                 <option>I'd like a quick quote</option>
                                 <option>I have a question about my policy</option>
                                 <option>I need help with a claim</option>
@@ -92,11 +92,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
                         <div class="form-group">
                             <label>Your Message (Optional)</label>
-                            <textarea placeholder="Tell us a little bit about what you're looking for..."></textarea>
+                            <textarea name="message" placeholder="Tell us a little bit about what you're looking for..."></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-red" style="width: 100%;">Send Message</button>
                     </form>
+                    <p id="contactFormMsg" style="display:none; margin-top:10px; font-weight:700;"></p>
                 </div>
             </div>
         </div>
@@ -243,23 +244,69 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         }
 
         @media (max-width: 992px) {
-            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-        }
-        @media (max-width: 768px) {
-            .contact-hero h1 { font-size: 34px; }
-            .contact-hero p { font-size: 17px; }
-            .contact-hero { padding: 50px 0; }
-            .contact-grid { padding: 40px 0; }
-            .contact-card { padding: 25px; }
-            .info-section h2 { font-size: 26px; }
-            .full-width-map { height: 300px; }
-            .personal-insurance-selector { padding: 50px 0; }
-            .detail-item h4 { font-size: 17px; }
-        }
-        @media (max-width: 480px) {
-            .contact-hero h1 { font-size: 28px; }
-            .selector-grid { grid-template-columns: 1fr 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
         }
     </style>
+
+    <script is:inline>
+        document.addEventListener('DOMContentLoaded', function() {
+            var contactForm = document.getElementById('contactForm');
+            var contactFormMsg = document.getElementById('contactFormMsg');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    var submitBtn = contactForm.querySelector('button[type="submit"]');
+                    var originalBtnText = submitBtn.textContent;
+
+                    // Show sending state
+                    submitBtn.textContent = 'Sending...';
+                    submitBtn.disabled = true;
+                    contactFormMsg.style.display = 'none';
+
+                    // Collect form data
+                    var formData = {
+                        first_name: contactForm.querySelector('input[name="first_name"]').value,
+                        last_name: contactForm.querySelector('input[name="last_name"]').value,
+                        email: contactForm.querySelector('input[name="email"]').value,
+                        phone: contactForm.querySelector('input[name="phone"]').value,
+                        help_type: contactForm.querySelector('select[name="help_type"]').value,
+                        message: contactForm.querySelector('textarea[name="message"]').value,
+                        page: 'contact'
+                    };
+
+                    // Submit to API
+                    fetch('/api/contact', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    })
+                    .then(function(response) { return response.json(); })
+                    .then(function(data) {
+                        if (data.success) {
+                            contactFormMsg.style.color = '#10b981';
+                            contactFormMsg.textContent = '✓ Your request has been sent! Our team will be in touch shortly.';
+                            contactFormMsg.style.display = 'block';
+                            contactForm.reset();
+                        } else {
+                            contactFormMsg.style.color = '#ef4444';
+                            contactFormMsg.textContent = data.error || 'Something went wrong. Please try again.';
+                            contactFormMsg.style.display = 'block';
+                        }
+                    })
+                    .catch(function() {
+                        contactFormMsg.style.color = '#ef4444';
+                        contactFormMsg.textContent = 'Network error. Please try again.';
+                        contactFormMsg.style.display = 'block';
+                    })
+                    .finally(function() {
+                        submitBtn.textContent = originalBtnText;
+                        submitBtn.disabled = false;
+                    });
+                });
+            }
+        });
+    </script>
 
 </BaseLayout>

@@ -139,8 +139,7 @@ h1, h2, h3 {
 .close-modal:hover { color: var(--primary-red); }
 
 /* Quote Modal */
-.quote-form-modal { max-width: 600px !important; overflow-y: hidden; padding-top: 0 !important; }
-@media (max-height: 800px) { .quote-form-modal { max-height: 85vh; overflow-y: auto; } }
+.quote-form-modal { max-width: 600px !important; max-height: 90vh; overflow-y: auto; padding-top: 0 !important; }
 .quote-form-modal .close-modal { position: sticky; top: 0; right: 0; z-index: 10; display: block; text-align: right; padding: 12px 0 0 0; background: white; margin-bottom: -5px; }
 .form-header { margin-bottom: 15px; border-bottom: 2px solid var(--bg-light); padding-bottom: 10px; text-align: center; }
 .form-header h2 { font-size: 28px; color: var(--primary-red); margin-bottom: 5px; }
@@ -281,9 +280,11 @@ h1, h2, h3 {
 .newsletter-text { flex: 1; text-align: left; }
 .newsletter h2 { color: #ffffff !important; margin-bottom: 10px; font-size: 28px; line-height: 1.2; }
 .newsletter p { font-size: 16px; color: #d1d5db; margin: 0; line-height: 1.4; }
+.newsletter-form-wrap { flex-shrink: 0; }
 .newsletter-form { display: flex; gap: 15px; align-items: center; }
 .newsletter input { padding: 14px; width: 320px; border-radius: 6px; border: none; font-size: 16px; color: #0f172a; background: white; }
 .newsletter .btn { padding: 14px 24px; font-size: 16px; }
+#newsletterMsg { margin-top: 10px; font-size: 14px; }
 
 /* Footer */
 .new-footer { background: var(--dark-blue); color: #d1d5db; padding: 30px 0 0 0; }
