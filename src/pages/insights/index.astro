@@ -1,0 +1,273 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import posts from '../../data/posts.json';
+
+const POSTS_PER_PAGE = 12;
+const currentPage = 1;
+const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+const pagePosts = posts.slice(0, POSTS_PER_PAGE);
+
+// Collect all unique categories for filter
+const allCategories = [...new Set(posts.flatMap(p => p.categories))].sort();
+---
+
+<BaseLayout title="Insurance Insights | Hometown Insurance Agency" description="Stay informed with insurance tips, safety advice, and industry insights from the Hometown Insurance team.">
+
+    <!-- Hero -->
+    <div class="hero-simple" style="background-image: url('/images/insights-hero.jpg');">
+        <div class="container">
+            <h1>Insurance Insights</h1>
+            <p>Stay informed with tips, guides, and expert advice from the Hometown team.</p>
+        </div>
+    </div>
+
+    <div class="insights-listing">
+        <div class="container">
+
+            <!-- Category Filter -->
+            <div class="insights-filters">
+                <button class="filter-btn active" data-category="all">All</button>
+                {allCategories.map(cat => (
+                    <button class="filter-btn" data-category={cat}>{cat}</button>
+                ))}
+            </div>
+
+            <!-- Posts Grid -->
+            <div class="insights-grid" id="postsGrid">
+                {pagePosts.map(post => {
+                    const d = new Date(post.date);
+                    const dateStr = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                    return (
+                        <div class="blog-card" data-categories={JSON.stringify(post.categories)}>
+                            {post.image && (
+                                <div class="blog-img" style={`background-image: url('${post.image}');`}></div>
+                            )}
+                            <div class="blog-content">
+                                <span class="blog-date">{dateStr}</span>
+                                <h3>{post.title}</h3>
+                                <div class="blog-categories">
+                                    {post.categories.map(cat => (
+                                        <span class="category-badge">{cat}</span>
+                                    ))}
+                                </div>
+                                <p class="blog-excerpt">{post.excerpt}</p>
+                                <a href={`/insights/${post.slug}`} class="read-more">Read Full Article &rarr;</a>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <button class="pagination-btn" id="prevPage" disabled>&laquo; Previous</button>
+                <span class="pagination-info" id="pageInfo">Page 1 of {totalPages}</span>
+                <button class="pagination-btn" id="nextPage">Next &raquo;</button>
+            </div>
+        </div>
+    </div>
+
+    <script is:inline define:vars={{ allPosts: posts, postsPerPage: POSTS_PER_PAGE, totalPages }}>
+        var currentPage = 1;
+        var activeCategory = 'all';
+        var filteredPosts = allPosts;
+
+        function getFilteredPosts() {
+            if (activeCategory === 'all') return allPosts;
+            return allPosts.filter(function(p) {
+                return p.categories.indexOf(activeCategory) !== -1;
+            });
+        }
+
+        function renderPage() {
+            filteredPosts = getFilteredPosts();
+            var totalPg = Math.ceil(filteredPosts.length / postsPerPage);
+            if (currentPage > totalPg) currentPage = totalPg || 1;
+
+            var start = (currentPage - 1) * postsPerPage;
+            var pagePosts = filteredPosts.slice(start, start + postsPerPage);
+
+            var grid = document.getElementById('postsGrid');
+            var html = '';
+
+            for (var i = 0; i < pagePosts.length; i++) {
+                var post = pagePosts[i];
+                var d = new Date(post.date);
+                var dateStr = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+                var badges = '';
+                for (var j = 0; j < post.categories.length; j++) {
+                    badges += '<span class="category-badge">' + post.categories[j] + '</span>';
+                }
+
+                var imgHtml = post.image ? '<div class="blog-img" style="background-image: url(\'' + post.image + '\');"></div>' : '';
+
+                html += '<div class="blog-card">' +
+                    imgHtml +
+                    '<div class="blog-content">' +
+                    '<span class="blog-date">' + dateStr + '</span>' +
+                    '<h3>' + post.title + '</h3>' +
+                    '<div class="blog-categories">' + badges + '</div>' +
+                    '<p class="blog-excerpt">' + post.excerpt + '</p>' +
+                    '<a href="/insights/' + post.slug + '" class="read-more">Read Full Article &rarr;</a>' +
+                    '</div></div>';
+            }
+
+            grid.innerHTML = html;
+
+            // Update pagination
+            var pageInfo = document.getElementById('pageInfo');
+            var prevBtn = document.getElementById('prevPage');
+            var nextBtn = document.getElementById('nextPage');
+
+            pageInfo.textContent = 'Page ' + currentPage + ' of ' + totalPg;
+            prevBtn.disabled = currentPage <= 1;
+            nextBtn.disabled = currentPage >= totalPg;
+
+            // Scroll to top of listing
+            if (start > 0) {
+                document.querySelector('.insights-listing').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                activeCategory = btn.getAttribute('data-category');
+                currentPage = 1;
+                renderPage();
+            });
+        });
+
+        // Pagination buttons
+        document.getElementById('prevPage').addEventListener('click', function() {
+            if (currentPage > 1) { currentPage--; renderPage(); }
+        });
+        document.getElementById('nextPage').addEventListener('click', function() {
+            var totalPg = Math.ceil(filteredPosts.length / postsPerPage);
+            if (currentPage < totalPg) { currentPage++; renderPage(); }
+        });
+    </script>
+
+    <style>
+        .hero-simple::before {
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.8));
+        }
+        .insights-listing {
+            padding: 60px 0 80px;
+            background: var(--bg-light);
+        }
+        .insights-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+            justify-content: center;
+        }
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 50px;
+            border: 2px solid #d1d5db;
+            background: white;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover {
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+        }
+        .filter-btn.active {
+            background: var(--primary-red);
+            color: white;
+            border-color: var(--primary-red);
+        }
+        .insights-listing .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .insights-listing .blog-card {
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .insights-listing .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .insights-listing .blog-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .blog-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+        .category-badge {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 50px;
+            background: #eef2ff;
+            color: var(--link-blue);
+            letter-spacing: 0.05em;
+        }
+        .blog-excerpt {
+            color: var(--text-gray);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            flex: 1;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 50px;
+        }
+        .pagination-btn {
+            padding: 12px 28px;
+            border: 2px solid var(--primary-red);
+            background: white;
+            color: var(--primary-red);
+            font-weight: 700;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .pagination-btn:hover:not(:disabled) {
+            background: var(--primary-red);
+            color: white;
+        }
+        .pagination-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .pagination-info {
+            font-weight: 700;
+            color: var(--dark-blue);
+            font-size: 16px;
+        }
+        @media (max-width: 992px) {
+            .insights-listing .insights-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .insights-listing .insights-grid { grid-template-columns: 1fr; }
+            .insights-listing { padding: 40px 0 60px; }
+            .insights-filters { gap: 8px; }
+            .filter-btn { padding: 6px 14px; font-size: 13px; }
+        }
+    </style>
+
+</BaseLayout>

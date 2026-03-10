@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import allPosts from '../data/posts.json';
+
+const recentPosts = allPosts.slice(0, 3);
 ---
 
 <BaseLayout title="Hometown Insurance Agency Prototype">
@@ -224,11 +227,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Insurance Insights -->
     <div id="insights" class="insights-section">
         <div class="container">
-            <div class="insights-header"><h2>Insurance Insights</h2><a href="#" class="read-more">View All Articles &rarr;</a></div>
+            <div class="insights-header"><h2>Insurance Insights</h2><a href="/insights" class="read-more">View All Articles &rarr;</a></div>
             <div class="insights-grid">
-                <div class="blog-card"><div class="blog-img" style="background-image: url('https://static-asset.amac.us/wp-content/uploads/2026/02/11104416/packages.jpg');"></div><div class="blog-content"><span class="blog-date">JULY 15, 2026</span><h3>Keep Your Packages Safe</h3><a href="#" class="read-more">Read Full Article &rarr;</a></div></div>
-                <div class="blog-card"><div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=400&q=80');"></div><div class="blog-content"><span class="blog-date">JUNE 10, 2026</span><h3>Best Insurance Rates</h3><a href="#" class="read-more">Read Full Article &rarr;</a></div></div>
-                <div class="blog-card"><div class="blog-img" style="background-image: url('https://static-asset.amac.us/wp-content/uploads/2026/02/11104414/christmas-lights.jpg');"></div><div class="blog-content"><span class="blog-date">DEC 01, 2025</span><h3>Decorating Safety</h3><a href="#" class="read-more">Read Full Article &rarr;</a></div></div>
+                {recentPosts.map(post => {
+                    const d = new Date(post.date);
+                    const dateStr = d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }).toUpperCase();
+                    return (
+                        <div class="blog-card">
+                            {post.image && (
+                                <div class="blog-img" style={`background-image: url('${post.image}');`}></div>
+                            )}
+                            <div class="blog-content">
+                                <span class="blog-date">{dateStr}</span>
+                                <h3>{post.title}</h3>
+                                <a href={`/insights/${post.slug}`} class="read-more">Read Full Article &rarr;</a>
+                            </div>
+                        </div>
+                    );
+                })}
             </div>
         </div>
     </div>

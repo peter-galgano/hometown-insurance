@@ -1,0 +1,207 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import posts from '../../data/posts.json';
+
+export function getStaticPaths() {
+    return posts.map(post => ({
+        params: { slug: post.slug },
+        props: { post }
+    }));
+}
+
+const { post } = Astro.props;
+const d = new Date(post.date);
+const dateStr = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout title={`${post.title} | Hometown Insurance Insights`} description={post.excerpt}>
+
+    <!-- Hero -->
+    <div class="hero-simple article-hero" style="background-image: url('https://images.unsplash.com/photo-1504711434969-e33886168d6c?auto=format&fit=crop&w=1600&q=80');">
+        <div class="container">
+            <div class="article-hero-content">
+                <div class="article-categories">
+                    {post.categories.map(cat => (
+                        <span class="category-badge">{cat}</span>
+                    ))}
+                </div>
+                <h1>{post.title}</h1>
+                <div class="article-meta">
+                    <span><i class="fa-regular fa-calendar"></i> {dateStr}</span>
+                    <span><i class="fa-regular fa-user"></i> {post.author}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="article-wrapper">
+        <div class="container">
+            <div class="article-layout">
+                <article class="article-content" set:html={post.content} />
+                <aside class="article-sidebar">
+                    <a href="/insights" class="btn btn-white sidebar-back"><i class="fa-solid fa-arrow-left"></i> Back to Insights</a>
+                    <div class="sidebar-box">
+                        <h3>Need Coverage?</h3>
+                        <p>Our team is ready to help you find the right insurance for your needs.</p>
+                        <a href="#" class="btn btn-red btn-pulse openQuoteTrigger" style="width: 100%;">Get a Quote</a>
+                    </div>
+                    <div class="sidebar-box">
+                        <h3>Categories</h3>
+                        <div class="sidebar-categories">
+                            {post.categories.map(cat => (
+                                <span class="category-badge">{cat}</span>
+                            ))}
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .hero-simple::before {
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85));
+        }
+        .article-hero { padding: 80px 0; }
+        .article-hero-content { max-width: 800px; margin: 0 auto; }
+        .article-hero h1 { font-size: 42px; line-height: 1.15; margin-bottom: 20px; }
+        .article-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+        .category-badge {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 4px 14px;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            letter-spacing: 0.05em;
+        }
+        .article-meta {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            font-size: 16px;
+            color: #cbd5e1;
+        }
+        .article-meta i { margin-right: 6px; }
+
+        .article-wrapper {
+            padding: 60px 0 80px;
+            background: var(--bg-light);
+        }
+        .article-layout {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 50px;
+            align-items: start;
+        }
+        .article-content {
+            background: white;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            line-height: 1.8;
+            font-size: 17px;
+            color: var(--text-gray);
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        .article-content h2, .article-content h3, .article-content h4 {
+            color: var(--dark-blue);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .article-content h2 { font-size: 28px; }
+        .article-content h3 { font-size: 22px; }
+        .article-content p { margin-bottom: 18px; }
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .article-content a {
+            color: var(--primary-red);
+            font-weight: 600;
+        }
+        .article-content ul, .article-content ol {
+            margin-bottom: 18px;
+            padding-left: 25px;
+        }
+        .article-content li { margin-bottom: 8px; }
+        .article-content blockquote {
+            border-left: 4px solid var(--primary-red);
+            padding: 15px 20px;
+            margin: 20px 0;
+            background: #fef2f2;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+        .article-content iframe {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .article-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            position: sticky;
+            top: 180px;
+        }
+        .sidebar-back {
+            text-align: center;
+        }
+        .sidebar-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .sidebar-box h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .sidebar-box p {
+            font-size: 15px;
+            color: var(--text-gray);
+            margin-bottom: 15px;
+        }
+        .sidebar-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .sidebar-categories .category-badge {
+            background: #eef2ff;
+            color: var(--link-blue);
+        }
+
+        @media (max-width: 992px) {
+            .article-layout {
+                grid-template-columns: 1fr;
+            }
+            .article-sidebar {
+                position: static;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .sidebar-back { order: -1; }
+            .sidebar-box { flex: 1; min-width: 250px; }
+        }
+        @media (max-width: 768px) {
+            .article-hero { padding: 60px 0; }
+            .article-hero h1 { font-size: 28px; }
+            .article-content { padding: 25px; font-size: 16px; }
+            .article-meta { flex-direction: column; gap: 8px; font-size: 14px; }
+        }
+    </style>
+
+</BaseLayout>
