@@ -49,235 +49,265 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <p style="max-width: 800px; margin: 20px auto; color: var(--text-gray);">Our insurance producers and customer service representatives meet New York State's strict licensing, testing, and education requirements. We are committed to continuing education and professional development, ensuring our team stays up to date on the latest home, auto, and business insurance policies, regulations, and risk management strategies. This allows us to provide knowledgeable guidance and exceptional service to every client we serve.</p>
             </div>
 
-            <div class="team-groups">
-
-                <div class="team-group-section">
-                    <h3>Executive Management</h3>
-                    <div class="team-grid">
-                        <div class="team-card">
-                            <h4>Rebecca Weber, CPCU</h4>
-                            <p class="member-title">President & Chief Executive Officer</p>
-                            <div class="member-license">Licensed Property & Casualty Broker / Licensed Life, Accident & Health Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Eric Keiffert, CPCU</h4>
-                            <p class="member-title">Executive Vice President</p>
-                            <div class="member-license">Licensed Property & Casualty Broker / Licensed Life, Accident & Health Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Joanie LaFemina, CPSP™</h4>
-                            <p class="member-title">Vice President of Human Resources & Marketing</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>James Small, CIC</h4>
-                            <p class="member-title">Vice President of Sales</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
+            <div class="team-accordion">
+                <div class="team-group active">
+                    <div class="team-header">
+                        <h3>Executive Management</h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="team-content">
+                        <div class="team-grid-exec">
+                            <div class="team-card">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info">
+                                    <h4>Rebecca Weber, CPCU</h4>
+                                    <p>President & Chief Executive Officer</p>
+                                    <div class="member-contact">Licensed Property & Casualty Broker / Licensed Life, Accident & Health Broker</div>
+                                </div>
+                            </div>
+                            <div class="team-card">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info">
+                                    <h4>Eric Keiffert, CPCU</h4>
+                                    <p>Executive Vice President</p>
+                                    <div class="member-contact">Licensed Property & Casualty Broker / Licensed Life, Accident & Health Broker</div>
+                                </div>
+                            </div>
+                            <div class="team-card">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info">
+                                    <h4>Joanie LaFemina, CPSP™</h4>
+                                    <p>Vice President of Human Resources & Marketing</p>
+                                    <div class="member-contact">Licensed Property & Casualty Broker</div>
+                                </div>
+                            </div>
+                            <div class="team-card">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info">
+                                    <h4>James Small, CIC</h4>
+                                    <p>Vice President of Sales</p>
+                                    <div class="member-contact">Licensed Property & Casualty Broker</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="team-group-section">
-                    <h3>Accounting</h3>
-                    <div class="team-grid">
-                        <div class="team-card">
-                            <h4>Steven Bucci</h4>
-                            <p class="member-title">Accounting Manager</p>
-                        </div>
-                        <div class="team-card">
-                            <h4>Lauren Cusumano</h4>
-                            <p class="member-title">Accounting Assistant</p>
-                        </div>
-                        <div class="team-card">
-                            <h4>Theresa Puleo</h4>
-                            <p class="member-title">Accounting Assistant</p>
+                <div class="team-group">
+                    <div class="team-header">
+                        <h3>Claims & Certificates</h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="team-content">
+                        <div class="team-grid-small">
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Ryan Boos</h4><p>Claims and Certificate Coordinator</p><div class="member-contact">Licensed Property & Casualty Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Amy Trinkle</h4><p>Claims and Certificate Coordinator</p><div class="member-contact">Licensed Property & Casualty Broker</div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="team-group-section">
-                    <h3>Administration</h3>
-                    <div class="team-grid">
-                        <div class="team-card">
-                            <h4>Veronica Schoenewolf</h4>
-                            <p class="member-title">Part-Time Admin Assistant</p>
-                        </div>
-                        <div class="team-card">
-                            <h4>Sandra Wess</h4>
-                            <p class="member-title">Admin Assistant — Reception</p>
+                <div class="team-group">
+                    <div class="team-header">
+                        <h3>Commercial Lines</h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="team-content">
+                        <div class="team-grid-small">
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Pasquale Burdo</h4><p>Commercial Account Executive</p><div class="member-contact">Licensed Property & Casualty Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>John DiPalma, CRIS</h4><p>Commercial Sales Broker</p><div class="member-contact">Licensed Property & Casualty Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Gerard Fitzpatrick, CIC</h4><p>Commercial Account Executive</p><div class="member-contact">Licensed Property & Casualty Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Julia Keiffert, CIC, CRIS</h4><p>Commercial Account Executive, Brokerage Division</p><div class="member-contact">Licensed Property & Casualty Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>John Machalski III, CRIS</h4><p>Commercial Account Executive, Brokerage Division</p><div class="member-contact">Licensed Property & Casualty Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Annabelle Olmedo</h4><p>Commercial Senior Account Executive</p><div class="member-contact">Licensed Property & Casualty Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Linda Otero</h4><p>Commercial Account Executive</p><div class="member-contact">Licensed Property & Casualty Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Michael Paglino, CIC</h4><p>Commercial Account Executive</p><div class="member-contact">Licensed Property & Casualty Broker</div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="team-group-section">
-                    <h3>Claims & Certificates</h3>
-                    <div class="team-grid">
-                        <div class="team-card">
-                            <h4>Ryan Boos</h4>
-                            <p class="member-title">Claims and Certificate Coordinator</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Amy Trinkle</h4>
-                            <p class="member-title">Claims and Certificate Coordinator</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
+                <div class="team-group">
+                    <div class="team-header">
+                        <h3>Personal Lines</h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="team-content">
+                        <div class="team-grid-small">
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Frances Aniello Manziak</h4><p>Personal Lines CSR Assistant</p><div class="member-contact">Licensed Property & Casualty Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Stacy Betro</h4><p>Director of Personal Lines</p><div class="member-contact">Licensed Property & Casualty Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Harry Fritzen</h4><p>Renewal Underwriter</p><div class="member-contact">Licensed Property & Casualty Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Thomas Kidby</h4><p>Personal Lines Account Representative</p><div class="member-contact">Licensed Property & Casualty Broker / Licensed Life, Accident & Health Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Faith Lambert</h4><p>Personal Lines Sales Broker</p><div class="member-contact">Licensed Property & Casualty Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Jaime Majano</h4><p>Personal Lines Account Representative</p><div class="member-contact">Licensed Property & Casualty Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Leslie Rendon</h4><p>Personal Lines Account Representative</p><div class="member-contact">Licensed Property & Casualty Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Vincent Russo</h4><p>Personal Lines CSR Assistant</p><div class="member-contact">Licensed Property & Casualty Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Jack Tramuta</h4><p>Personal Lines Sales Broker</p><div class="member-contact">Licensed Property & Casualty Broker / Licensed Life Agent / Independent Adjuster</div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="team-group-section">
-                    <h3>Commercial Lines</h3>
-                    <div class="team-grid">
-                        <div class="team-card">
-                            <h4>Pasquale Burdo</h4>
-                            <p class="member-title">Commercial Account Executive</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>John DiPalma, CRIS</h4>
-                            <p class="member-title">Commercial Sales Broker</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Gerard Fitzpatrick, CIC</h4>
-                            <p class="member-title">Commercial Account Executive</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Julia Keiffert, CIC, CRIS</h4>
-                            <p class="member-title">Commercial Account Executive — Brokerage Division</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>John Machalski III, CRIS</h4>
-                            <p class="member-title">Commercial Account Executive — Brokerage Division</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Annabelle Olmedo</h4>
-                            <p class="member-title">Commercial Senior Account Executive</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Linda Otero</h4>
-                            <p class="member-title">Commercial Account Executive</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Michael Paglino, CIC</h4>
-                            <p class="member-title">Commercial Account Executive</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
+                <div class="team-group">
+                    <div class="team-header">
+                        <h3>Firefighters & LOSAP</h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="team-content">
+                        <div class="team-grid-small">
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Teresa Cowan</h4><p>Operations Supervisor</p><div class="member-contact">Licensed Life, Accident & Health Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Jacob Keiffert</h4><p>Service Award Program Specialist</p><div class="member-contact">Licensed Life, Accident & Health Broker / Licensed Personal Lines Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Michele Latzen</h4><p>Service Award Program Specialist</p><div class="member-contact">Licensed Life, Accident & Health Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Kevin Parrett</h4><p>Vice President LOSAP Administration</p><div class="member-contact">Licensed Life, Accident & Health Broker / Licensed Property & Casualty Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Donna Rooney</h4><p>Service Award Program Specialist</p><div class="member-contact">Licensed Life, Accident & Health Broker</div></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Robert Sagistano</h4><p>Senior Vice President</p><div class="member-contact">Licensed Life, Accident & Health Broker</div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="team-group-section">
-                    <h3>Firefighters & LOSAP</h3>
-                    <div class="team-grid">
-                        <div class="team-card">
-                            <h4>Teresa Cowan</h4>
-                            <p class="member-title">Operations Supervisor</p>
-                            <div class="member-license">Licensed Life, Accident & Health Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Jacob Keiffert</h4>
-                            <p class="member-title">Service Award Program Specialist</p>
-                            <div class="member-license">Licensed Life, Accident & Health Broker / Licensed Personal Lines Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Michele Latzen</h4>
-                            <p class="member-title">Service Award Program Specialist</p>
-                            <div class="member-license">Licensed Life, Accident & Health Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Kevin Parrett</h4>
-                            <p class="member-title">Vice President LOSAP Administration</p>
-                            <div class="member-license">Licensed Life, Accident & Health Broker / Licensed Property & Casualty Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Donna Rooney</h4>
-                            <p class="member-title">Service Award Program Specialist</p>
-                            <div class="member-license">Licensed Life, Accident & Health Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Robert Sagistano</h4>
-                            <p class="member-title">Senior Vice President</p>
-                            <div class="member-license">Licensed Life, Accident & Health Broker</div>
+                <div class="team-group">
+                    <div class="team-header">
+                        <h3>Accounting</h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="team-content">
+                        <div class="team-grid-small">
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Steven Bucci</h4><p>Accounting Manager</p></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Lauren Cusumano</h4><p>Accounting Assistant</p></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Theresa Puleo</h4><p>Accounting Assistant</p></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="team-group-section">
-                    <h3>Marketing</h3>
-                    <div class="team-grid">
-                        <div class="team-card">
-                            <h4>Gabrielle Comanda</h4>
-                            <p class="member-title">Marketing & HR Assistant</p>
+                <div class="team-group">
+                    <div class="team-header">
+                        <h3>Administration</h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="team-content">
+                        <div class="team-grid-small">
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Veronica Schoenewolf</h4><p>Part-Time Admin Assistant</p></div>
+                            </div>
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Sandra Wess</h4><p>Admin Assistant, Reception</p></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="team-group-section">
-                    <h3>Personal Lines</h3>
-                    <div class="team-grid">
-                        <div class="team-card">
-                            <h4>Frances Aniello Manziak</h4>
-                            <p class="member-title">Personal Lines CSR Assistant</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Stacy Betro</h4>
-                            <p class="member-title">Director of Personal Lines</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Harry Fritzen</h4>
-                            <p class="member-title">Renewal Underwriter</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Thomas Kidby</h4>
-                            <p class="member-title">Personal Lines Account Representative</p>
-                            <div class="member-license">Licensed Property & Casualty Broker / Licensed Life, Accident & Health Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Faith Lambert</h4>
-                            <p class="member-title">Personal Lines Sales Broker</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Jaime Majano</h4>
-                            <p class="member-title">Personal Lines Account Representative</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Leslie Rendon</h4>
-                            <p class="member-title">Personal Lines Account Representative</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Vincent Russo</h4>
-                            <p class="member-title">Personal Lines CSR Assistant</p>
-                            <div class="member-license">Licensed Property & Casualty Broker</div>
-                        </div>
-                        <div class="team-card">
-                            <h4>Jack Tramuta</h4>
-                            <p class="member-title">Personal Lines Sales Broker</p>
-                            <div class="member-license">Licensed Property & Casualty Broker / Licensed Life Agent / Independent Adjuster</div>
+                <div class="team-group">
+                    <div class="team-header">
+                        <h3>Marketing</h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="team-content">
+                        <div class="team-grid-small">
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>Gabrielle Comanda</h4><p>Marketing & HR Assistant</p></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="team-group-section">
-                    <h3>Technology</h3>
-                    <div class="team-grid">
-                        <div class="team-card">
-                            <h4>David Kane</h4>
-                            <p class="member-title">CTO</p>
+                <div class="team-group">
+                    <div class="team-header">
+                        <h3>Technology</h3>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="team-content">
+                        <div class="team-grid-small">
+                            <div class="team-card team-card-small">
+                                <div class="member-img"><i class="fa-solid fa-user"></i></div>
+                                <div class="member-info"><h4>David Kane</h4><p>CTO</p></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -306,46 +336,45 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         .about-img { width: 100%; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
 
         .team-section { background: var(--bg-light); padding: 50px 0 100px 0; }
-        .team-groups { margin-top: 40px; }
-        .team-group-section { margin-bottom: 40px; }
-        .team-group-section h3 { font-size: 28px; color: var(--dark-blue); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 3px solid var(--primary-red); }
+        .team-accordion { margin-top: 40px; }
+        .team-group { margin-bottom: 15px; background: #fff; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0; }
+        .team-header { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: #fff; transition: background 0.2s; }
+        .team-header:hover { background: #fafafa; }
+        .team-header h3 { font-size: 28px; margin: 0; color: var(--dark-blue); }
+        .team-header i { color: var(--primary-red); transition: transform 0.3s; }
+        .team-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; padding: 0 25px; }
+        .team-group.active .team-content { max-height: 4000px; padding: 30px 25px; }
+        .team-group.active .team-header i { transform: rotate(180deg); }
 
-        .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .team-grid-exec { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .team-grid-small { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 
-        .team-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; }
-        .team-card h4 { font-size: 18px; color: var(--dark-blue); margin-bottom: 5px; }
-        .team-card .member-title { font-size: 13px; color: var(--primary-red); font-weight: 700; text-transform: uppercase; margin-bottom: 8px; line-height: 1.3; }
-        .team-card .member-license { font-size: 12px; color: var(--text-gray); border-top: 1px solid #eee; padding-top: 8px; line-height: 1.4; }
+        .team-card { background: var(--bg-light); border-radius: 12px; overflow: hidden; height: 100%; border: 1px solid #eee; }
+        .member-img { height: 280px; background: #cbd5e1; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #94a3b8; }
+        .team-card-small .member-img { height: 200px; font-size: 30px; }
+        .member-info { padding: 20px; }
+        .member-info h4 { font-size: 20px; margin-bottom: 5px; color: var(--dark-blue); }
+        .member-info p { font-size: 14px; color: var(--primary-red); font-weight: 700; margin-bottom: 10px; text-transform: uppercase; line-height: 1.3; }
+        .member-contact { font-size: 13px; color: var(--text-gray); border-top: 1px solid #ddd; padding-top: 10px; }
 
         .product-selector { text-align: center; padding: 60px 0 100px 0; background: white; }
 
         @media (max-width: 992px) {
-            .team-grid { grid-template-columns: repeat(2, 1fr); }
-            .about-grid { grid-template-columns: 1fr; gap: 40px; }
-        }
-        @media (max-width: 768px) {
-            .section-padding { padding: 50px 0; }
-            .mission-box h2 { font-size: 28px; }
-            .mission-description { font-size: 17px; }
-            .about-text h2 { font-size: 28px; }
-            .about-grid { gap: 30px; margin-bottom: 30px; }
-            .team-section { padding: 30px 0 60px 0; }
-            .team-group-section h3 { font-size: 22px; }
+            .team-grid-exec, .team-grid-small { grid-template-columns: 1fr 1fr; }
+            .about-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 600px) {
-            .team-grid { grid-template-columns: 1fr; }
-            .mission-box { padding-left: 20px; }
-            .mission-box h2 { font-size: 24px; }
+            .team-grid-exec, .team-grid-small { grid-template-columns: 1fr; }
         }
     </style>
 
     <script is:inline>
-        var phrases = ["We work for you", "We save money for you", "We protect you and your family"];
-        var typingElement = document.getElementById("typing-text");
-        var phraseIndex = 0;
-        var charIndex = 0;
-        var typingSpeed = 100;
-        var displayTime = 3000;
+        const phrases = ["We work for you", "We save money for you", "We protect you and your family"];
+        const typingElement = document.getElementById("typing-text");
+        let phraseIndex = 0;
+        let charIndex = 0;
+        const typingSpeed = 100;
+        const displayTime = 3000;
 
         function typePhrase() {
             if (charIndex < phrases[phraseIndex].length) {
@@ -360,7 +389,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         function fadeOutPhrase() {
             typingElement.style.opacity = "0";
-            setTimeout(function() {
+            setTimeout(() => {
                 typingElement.textContent = "";
                 charIndex = 0;
                 phraseIndex = (phraseIndex + 1) % phrases.length;
@@ -369,6 +398,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         }
 
         typePhrase();
+
+        document.querySelectorAll('.team-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const group = header.parentElement;
+                if (group.classList.contains('active')) {
+                    group.classList.remove('active');
+                } else {
+                    group.classList.add('active');
+                }
+            });
+        });
     </script>
 
 </BaseLayout>
