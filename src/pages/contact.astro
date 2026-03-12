@@ -22,7 +22,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                         <i class="fa-solid fa-map-location-dot"></i>
                         <div>
                             <h4>Address</h4>
-                            <p>5 Orville Drive, Suite 400<br>Bohemia, NY 11716</p>
+                            <p><a href=".full-width-map" onclick="event.preventDefault(); document.querySelector('.full-width-map').scrollIntoView({ behavior: 'smooth' });" style="color: inherit; text-decoration: none; cursor: pointer;">5 Orville Drive, Suite 400<br>Bohemia, NY 11716</a></p>
                         </div>
                     </div>
                     <div class="detail-item">
@@ -82,14 +82,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                                 <input type="email" name="email" placeholder="john.doe@email.com" required>
                             </div>
                             <div class="form-group">
-                                <label>Phone Number</label>
-                                <input type="tel" name="phone" placeholder="(555) 555-5555">
+                                <label>Phone Number <span class="req">*</span></label>
+                                <input type="tel" name="phone" placeholder="(555) 555-5555" required>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label>How can we help?</label>
-                            <select name="help_type">
+                            <label>How can we help? <span class="req">*</span></label>
+                            <select name="help_type" required>
                                 <option>I'd like a quick quote</option>
                                 <option>I have a question about my policy</option>
                                 <option>I need help with a claim</option>
