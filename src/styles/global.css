@@ -566,11 +566,9 @@ body.nav-open .nav-overlay { display: block; }
   .logo img { height: 60px; width: auto; object-fit: contain; }
 
   /* Hero - hide background images on mobile, solid navy */
-  .hero-simple {
-    background-image: none !important;
-    background-color: var(--dark-blue) !important;
-  }
-  .contact-hero {
+  .hero-simple,
+  .contact-hero,
+  .hero-wrapper {
     background-image: none !important;
     background-color: var(--dark-blue) !important;
   }
