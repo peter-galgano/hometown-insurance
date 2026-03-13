@@ -288,6 +288,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 .then(function(response) { return response.json(); })
                 .then(function(data) {
                     if (data.success) {
+                        window.dataLayer = window.dataLayer || [];
+                        window.dataLayer.push({
+                            event: 'form_submission',
+                            form_name: 'contact',
+                            insurance_type: '',
+                            contact_method: '',
+                            hear_about: '',
+                            help_type: formData.help_type || ''
+                        });
                         contactFormMsg.style.color = '#10b981';
                         contactFormMsg.textContent = '✓ Your message has been sent! Our team will be in touch shortly.';
                         contactFormMsg.style.display = 'block';

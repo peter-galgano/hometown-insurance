@@ -381,6 +381,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     .then(function(response) { return response.json(); })
                     .then(function(data) {
                         if (data.success) {
+                            window.dataLayer = window.dataLayer || [];
+                            window.dataLayer.push({
+                                event: 'form_submission',
+                                form_name: formData.page + (formData.form_position ? '-' + formData.form_position : ''),
+                                insurance_type: formData.insurance_type || '',
+                                contact_method: formData.contact_method || '',
+                                hear_about: formData.hear_about || '',
+                                help_type: ''
+                            });
                             msg.style.color = '#10b981';
                             msg.textContent = '✓ Your request has been sent! Our team will be in touch shortly.';
                             msg.style.display = 'block';

@@ -278,6 +278,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 .then(function(res) { return res.json(); })
                 .then(function(data) {
                     if (data.success) {
+                        window.dataLayer = window.dataLayer || [];
+                        window.dataLayer.push({
+                            event: 'form_submission',
+                            form_name: 'faq',
+                            insurance_type: formData.insurance_type || '',
+                            contact_method: '',
+                            hear_about: '',
+                            help_type: ''
+                        });
                         faqMsg.style.color = '#10b981';
                         faqMsg.textContent = '✓ Your question has been submitted! Our team will get back to you shortly.';
                         faqMsg.style.display = 'block';
