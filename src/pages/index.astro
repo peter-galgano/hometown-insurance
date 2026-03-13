@@ -1,1 +1,526 @@
-404: Not Found
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import allPosts from '../data/posts.json';
+
+const recentPosts = allPosts.slice(0, 3);
+---
+
+<BaseLayout title="Hometown Insurance Agency">
+    <a href="#" class="btn btn-red btn-pulse openQuoteTrigger" slot="quote-button">Get a Quote</a>
+
+    <!-- Quote Modal -->
+    <div class="modal-overlay" id="quoteModal">
+        <div class="modal-content quote-form-modal">
+            <span class="close-modal" id="closeQuoteModal">&times;</span>
+            <div class="form-header">
+                <h2>Get Your Personal Quote</h2>
+                <p>Tell us a bit about your needs and we'll handle the rest.</p>
+            </div>
+            <form id="homeQuoteForm">
+                <div class="form-group"><label>Full Name <span class="req">*</span></label><input type="text" name="full_name" placeholder="John Doe" required></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Email Address <span class="req">*</span></label><input type="email" name="email" placeholder="john@example.com" required></div>
+                    <div class="form-group"><label>Phone Number <span class="req">*</span></label><input type="tel" name="phone" placeholder="631-555-0100" required></div>
+                </div>
+                <div class="form-group">
+                    <label>Insurance type? <span class="req">*</span></label>
+                    <select id="homeInsuranceType" name="insurance_type" required>
+                        <option value="" disabled selected>Select an option...</option>
+                        <option>Personal Protection (Home/Auto)</option>
+                        <option>Business & Commercial</option>
+                        <option>Firefighter & EMS Services</option>
+                        <option>Life & Health</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group" id="homeOtherInsuranceDiv" style="display: none; margin-top: -10px;">
+                    <label>Please specify insurance type: <span class="req">*</span></label>
+                    <input type="text" id="homeOtherInsuranceInput" name="other_insurance" placeholder="Enter coverage type...">
+                </div>
+                <div class="form-group">
+                    <label>Preferred way for us to reach you? <span class="req">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-label"><input type="radio" name="contact_method" value="Email" checked> Email</label>
+                        <label class="radio-label"><input type="radio" name="contact_method" value="Callback"> Give me a callback</label>
+                    </div>
+                </div>
+                <div id="homeCallbackOptions" style="display: none; border-top: 1px solid #eee; padding-top: 15px; margin-top: 5px;">
+                    <div class="form-row">
+                        <div class="form-group"><label>Preferred Day <span class="req">*</span></label><select name="callback_day" required><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option></select></div>
+                        <div class="form-group"><label>Preferred Time <span class="req">*</span></label><select name="callback_time" required><option>Morning (9am - 12pm)</option><option>Afternoon (12pm - 5pm)</option><option>Evening (After 5pm)</option></select></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>How did you hear about us? <span class="req">*</span></label>
+                    <select id="homeHearAbout" name="hear_about" required>
+                        <option value="" disabled selected>Please select...</option>
+                        <option>Google Search</option>
+                        <option>Facebook / Instagram</option>
+                        <option>Friend or Family Member</option>
+                        <option>Mailing / Flyer</option>
+                        <option>Local Event</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group" id="homeHearOtherDiv" style="display: none; margin-top: -10px;">
+                    <label>Please specify how you heard about us: <span class="req">*</span></label>
+                    <input type="text" id="homeHearOtherInput" name="hear_other" placeholder="Tell us how you found us...">
+                </div>
+                <div class="form-group">
+                    <label>Promo Code (if any)</label>
+                    <input type="text" name="promo_code" placeholder="Enter promo code">
+                </div>
+                <div class="form-group">
+                    <label>Add a message (optional)</label>
+                    <textarea name="message" rows="2" placeholder="Tell us more about your specific needs..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-red btn-pulse" style="width: 100%; margin-top: 10px;">Send Quote Request</button>
+            </form>
+            <p id="homeQuoteFormMsg" style="display:none; margin-top:10px; font-weight:700; text-align:center;"></p>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero-wrapper-index">
+        <section class="container hero-index">
+            <div class="hero-content">
+                <p class="hero-label"><i class="fa-solid fa-shield-halved"></i> PROTECTION SINCE 1979</p>
+                <h1>Insurance Protection for What Matters Most</h1>
+                <p>At Hometown Insurance Agency, we provide trusted guidance and customized auto, home, and business insurance solutions to help protect your family, property, and livelihood with confidence.</p>
+                <div>
+                    <a href="#" class="btn btn-red btn-pulse openQuoteTrigger">Get a Quote</a>
+                    <a href="#insurance-built" class="btn btn-white" style="margin-left:15px;">View Our Products</a>
+                </div>
+            </div>
+            <div class="hero-img">
+                <button class="carousel-control prev" id="prevSlide"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="carousel-track" id="heroCarousel">
+                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80" class="carousel-slide active" alt="Home protection">
+                    <img src="https://static-asset.amac.us/wp-content/uploads/2026/02/05112417/Couple-montage.jpg" class="carousel-slide" alt="Couple">
+                    <img src="https://static-asset.amac.us/wp-content/uploads/2026/02/05112151/Medical-montage.jpg" class="carousel-slide" alt="Medical">
+                    <img src="/images/firefighter-new.jpg" class="carousel-slide" alt="Firefighters">
+                    <img src="https://static-asset.amac.us/wp-content/uploads/2026/02/05112147/Family-montage.jpg" class="carousel-slide" alt="Family">
+                    <img src="https://static-asset.amac.us/wp-content/uploads/2026/02/05112144/Driving-montage.jpg" class="carousel-slide" alt="Driving">
+                    <img src="https://static-asset.amac.us/wp-content/uploads/2026/02/05112142/Cyber-montage.jpg" class="carousel-slide" alt="Cyber">
+                    <img src="https://static-asset.amac.us/wp-content/uploads/2026/02/05112140/Business-montage.jpg" class="carousel-slide" alt="Business">
+                    <img src="/images/ems-new.jpg" class="carousel-slide" alt="EMS Services">
+                </div>
+                <button class="carousel-control next" id="nextSlide"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Reviews Bar -->
+    <div class="reviews-bar" id="reviews-section">
+        <div class="container">
+            <div class="marquee-wrapper">
+                <div class="reviews-marquee-track">
+                    <div class="review-card">
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <span class="category">Commercial</span>
+                        <p class="review-text">"Reasonable price. All the people here at Hometown have been very courteous and accommodating..."</p>
+                        <p class="author">John M</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <span class="category">Commercial</span>
+                        <p class="review-text">"I've had the pleasure of insuring my businesses and properties with Hometown Insurance for many years..."</p>
+                        <p class="author">K M</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <span class="category">Personal</span>
+                        <p class="review-text">"I have been with Hometown Insurance Agency since 1979, when I bought my first car. ..."</p>
+                        <p class="author">Mario Martins</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <span class="category">Personal</span>
+                        <p class="review-text">"I couldn't be happier with the team at Hometown. They treat you like family!! Yesterday..."</p>
+                        <p class="author">Laurie Kleinhenz</p>
+                    </div>
+                    <div class="review-card google-review-card">
+                        <div class="google-rating">
+                            <i class="fa-brands fa-google" style="font-size: 28px; color: #4285F4;"></i>
+                            <span style="font-size: 32px; font-weight: 800; color: var(--dark-blue); margin-left: 10px;">4.7</span>
+                        </div>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <p class="review-text" style="font-weight: 600;">Rated 4.7/5 on Google Reviews</p>
+                        <a href="https://www.google.com/search?q=Hometown+Insurance+Agency+Bohemia+NY+reviews" target="_blank" style="color: var(--primary-red); font-weight: 700; text-decoration: none; font-size: 14px;">View on Google &rarr;</a>
+                    </div>
+                    <!-- Duplicated for seamless scroll -->
+                    <div class="review-card">
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <span class="category">Commercial</span>
+                        <p class="review-text">"Reasonable price. All the people here at Hometown have been very courteous and accommodating..."</p>
+                        <p class="author">John M</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <span class="category">Commercial</span>
+                        <p class="review-text">"I've had the pleasure of insuring my businesses and properties with Hometown Insurance for many years..."</p>
+                        <p class="author">K M</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <span class="category">Personal</span>
+                        <p class="review-text">"I have been with Hometown Insurance Agency since 1979, when I bought my first car. ..."</p>
+                        <p class="author">Mario Martins</p>
+                    </div>
+                    <div class="review-card">
+                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <span class="category">Personal</span>
+                        <p class="review-text">"I couldn't be happier with the team at Hometown. They treat you like family!! Yesterday..."</p>
+                        <p class="author">Laurie Kleinhenz</p>
+                    </div>
+                    <div class="review-card google-review-card">
+                        <div class="google-rating">
+                            <i class="fa-brands fa-google" style="font-size: 28px; color: #4285F4;"></i>
+                            <span style="font-size: 32px; font-weight: 800; color: var(--dark-blue); margin-left: 10px;">4.7</span>
+                        </div>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <p class="review-text" style="font-weight: 600;">Rated 4.7/5 on Google Reviews</p>
+                        <a href="https://www.google.com/search?q=Hometown+Insurance+Agency+Bohemia+NY+reviews" target="_blank" style="color: var(--primary-red); font-weight: 700; text-decoration: none; font-size: 14px;">View on Google &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            <div class="see-more-reviews"><a href="/testimonials">View full reviews and testimonials &rarr;</a></div>
+        </div>
+    </div>
+
+    <!-- Insurance Built for You -->
+    <section class="container" id="insurance-built" style="scroll-margin-top: 180px;">
+        <div class="section-title">
+            <h2>Insurance Solutions Built for You</h2>
+            <p>At Hometown Insurance, we are a <b>family-owned</b>, full-service insurance agency dedicated to protecting what matters most. Whether you need coverage for your family, your business, or specialized professional needs, we offer a <b>wide range of personal, business, and specialty insurance solutions</b> tailored to every stage of life.</p>
+        </div>
+        <div class="product-row">
+            <div class="product-img"><img src="https://static-asset.amac.us/wp-content/uploads/2026/02/05102523/home-1.jpg" alt="Personal Protection"></div>
+            <div class="product-text">
+                <span class="label" style="color: var(--personal-blue);">FOR INDIVIDUALS</span>
+                <h2>Personal Protection</h2>
+                <p>Protect your home, family, and assets with the personal attention you deserve. Our home, auto, and specialty insurance solutions help you safeguard your life's most valuable investments.</p>
+                <ul class="product-bullets">
+                    <li>Homeowners & Renters Insurance</li>
+                    <li>Auto & Motorcycle Insurance</li>
+                    <li>Umbrella / Excess Liability</li>
+                    <li>Flood & Earthquake Coverage</li>
+                    <li>Valuable Items & Collections</li>
+                    <li>Boat & Watercraft Insurance</li>
+                </ul>
+                <a href="/personal" class="btn btn-personal" style="margin-top: 20px;">Explore Personal Coverage</a>
+            </div>
+        </div>
+        <div class="product-row">
+            <div class="product-img"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Business"></div>
+            <div class="product-text">
+                <span class="label" style="color: var(--success-green);">FOR BUSINESS</span>
+                <h2>Business Insurance</h2>
+                <p>Your business is your legacy. We partner with you to protect your assets, employees, and reputation with comprehensive business and commercial insurance solutions.</p>
+                <ul class="product-bullets product-bullets-green">
+                    <li>General, Professional (E&O) & Cyber Liability Options</li>
+                    <li>Directors & Officers (D&O) Coverage</li>
+                    <li>Commercial Property</li>
+                    <li>Business Interruption & Equipment Breakdown</li>
+                    <li>Commercial Auto</li>
+                    <li>Workers' Compensation Coverage</li>
+                </ul>
+                <a href="/business" class="btn btn-green">View Business Solutions</a>
+            </div>
+        </div>
+        <div class="product-row">
+            <div class="product-img"><img src="/images/firefighter-new.jpg" alt="Firefighter & EMS Services"></div>
+            <div class="product-text">
+                <span class="label" style="color: var(--primary-red);">FOR THOSE WHO SERVE</span>
+                <h2>Firefighter & EMS Services</h2>
+                <p>To our volunteer local Fire and EMS professionals: you protect our community every day, and it's our honor to protect you and your family with <b>specialized insurance programs for first responders and Fire Districts</b>.</p>
+                <ul class="product-bullets product-bullets-red">
+                    <li>Fire District Package (Property & Liability)</li>
+                    <li>VFBL & Workers' Compensation</li>
+                    <li>Group Accident & Sickness</li>
+                    <li>Group Term Life Insurance</li>
+                    <li>First Responder Auto & Home Discount</li>
+                    <li>Individual Life & Health Insurance</li>
+                </ul>
+                <a href="/firefighter-ems" class="btn btn-red">Explore Hero Programs</a>
+            </div>
+        </div>
+        <div class="product-row">
+            <div class="product-img"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80" alt="Life & Health"></div>
+            <div class="product-text">
+                <span class="label" style="color: var(--life-purple);">FOR PERSONAL SECURITY</span>
+                <h2>Life & Health Insurance</h2>
+                <p>Health and financial security are the foundation for a stable future. We guide you in selecting life, health, and retirement-focused insurance solutions that protect your family and create a lasting legacy.</p>
+                <ul class="product-bullets product-bullets-purple">
+                    <li>Life Insurance – Whole or Term</li>
+                    <li>Individual Health Coverage</li>
+                    <li>Group Health Coverage</li>
+                    <li>Voluntary Benefits: Dental & Vision, LTD</li>
+                    <li>Long-Term Care Coverage</li>
+                    <li>Disability Insurance</li>
+                </ul>
+                <a href="/life-health" class="btn btn-purple">Protect Your Future</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrier Bar -->
+    <div class="carrier-bar">
+        <div class="container">
+            <h3>Our Trusted Insurance Partners</h3>
+            <div class="logo-marquee-container">
+                <div class="logo-marquee-track">
+                    <img src="/images/logos/hartford.png" alt="The Hartford" class="carrier-logo">
+                    <img src="/images/logos/travelers.png" alt="Travelers" class="carrier-logo">
+                    <img src="/images/logos/progressive.png" alt="Progressive" class="carrier-logo">
+                    <img src="/images/logos/chubb.png" alt="Chubb" class="carrier-logo">
+                    <img src="/images/logos/liberty-mutual.png" alt="Liberty Mutual" class="carrier-logo">
+                    <img src="/images/logos/natgen.png" alt="National General" class="carrier-logo">
+                    <img src="/images/logos/natgenpremier.png" alt="National General Premier" class="carrier-logo">
+                    <img src="/images/logos/nbic.png" alt="NBIC" class="carrier-logo">
+                    <img src="/images/logos/kingstone.png" alt="Kingstone" class="carrier-logo">
+                    <img src="/images/logos/pra.png" alt="PRA" class="carrier-logo">
+                    <img src="/images/logos/safeco.png" alt="Safeco" class="carrier-logo">
+                    <img src="/images/logos/andover.png" alt="Andover" class="carrier-logo">
+                    <img src="/images/logos/merchants.png" alt="Merchants" class="carrier-logo">
+                    <!-- Duplicated for seamless scroll -->
+                    <img src="/images/logos/hartford.png" alt="The Hartford" class="carrier-logo">
+                    <img src="/images/logos/travelers.png" alt="Travelers" class="carrier-logo">
+                    <img src="/images/logos/progressive.png" alt="Progressive" class="carrier-logo">
+                    <img src="/images/logos/chubb.png" alt="Chubb" class="carrier-logo">
+                    <img src="/images/logos/liberty-mutual.png" alt="Liberty Mutual" class="carrier-logo">
+                    <img src="/images/logos/natgen.png" alt="National General" class="carrier-logo">
+                    <img src="/images/logos/natgenpremier.png" alt="National General Premier" class="carrier-logo">
+                    <img src="/images/logos/nbic.png" alt="NBIC" class="carrier-logo">
+                    <img src="/images/logos/kingstone.png" alt="Kingstone" class="carrier-logo">
+                    <img src="/images/logos/pra.png" alt="PRA" class="carrier-logo">
+                    <img src="/images/logos/safeco.png" alt="Safeco" class="carrier-logo">
+                    <img src="/images/logos/andover.png" alt="Andover" class="carrier-logo">
+                    <img src="/images/logos/merchants.png" alt="Merchants" class="carrier-logo">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Insurance Insights -->
+    <div id="insights" class="insights-section">
+        <div class="container">
+            <div class="insights-header"><h2>Insurance Insights</h2><a href="/insights" class="read-more">View All Articles &rarr;</a></div>
+            <div class="insights-grid">
+                {recentPosts.map(post => {
+                    const d = new Date(post.date);
+                    const dateStr = d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }).toUpperCase();
+                    return (
+                        <div class="blog-card">
+                            {post.image && (
+                                <div class="blog-img" style={`background-image: url('${post.image}');`}></div>
+                            )}
+                            <div class="blog-content">
+                                <span class="blog-date">{dateStr}</span>
+                                <h3>{post.title}</h3>
+                                <a href={`/insights/${post.slug}`} class="read-more">Read Full Article &rarr;</a>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    </div>
+
+    <script is:inline>
+        // Carousel
+        var currentSlide = 0;
+        var slides = document.querySelectorAll('.carousel-slide');
+        function showSlide(index) {
+            if (slides[currentSlide]) slides[currentSlide].classList.remove('active');
+            currentSlide = (index + slides.length) % slides.length;
+            if (slides[currentSlide]) slides[currentSlide].classList.add('active');
+        }
+        function showNextSlide() { showSlide(currentSlide + 1); }
+        function showPrevSlide() { showSlide(currentSlide - 1); }
+        var slideInterval = setInterval(showNextSlide, 4000);
+        function resetInterval() { clearInterval(slideInterval); slideInterval = setInterval(showNextSlide, 4000); }
+        document.getElementById('nextSlide').onclick = function() { showNextSlide(); resetInterval(); };
+        document.getElementById('prevSlide').onclick = function() { showPrevSlide(); resetInterval(); };
+
+        // Homepage Quote Form Handling
+        var homeInsuranceType = document.getElementById('homeInsuranceType');
+        var homeOtherInsuranceDiv = document.getElementById('homeOtherInsuranceDiv');
+        var homeOtherInsuranceInput = document.getElementById('homeOtherInsuranceInput');
+        var homeCallbackOptions = document.getElementById('homeCallbackOptions');
+        var homeHearAbout = document.getElementById('homeHearAbout');
+        var homeHearOtherDiv = document.getElementById('homeHearOtherDiv');
+        var homeHearOtherInput = document.getElementById('homeHearOtherInput');
+
+        // Insurance type "Other" toggle
+        if (homeInsuranceType) {
+            homeInsuranceType.addEventListener('change', function() {
+                if (this.value === 'Other') {
+                    homeOtherInsuranceDiv.style.display = 'block';
+                    if (homeOtherInsuranceInput) homeOtherInsuranceInput.setAttribute('required', 'required');
+                } else {
+                    homeOtherInsuranceDiv.style.display = 'none';
+                    if (homeOtherInsuranceInput) homeOtherInsuranceInput.removeAttribute('required');
+                }
+            });
+        }
+
+        // Contact method toggle
+        document.querySelectorAll('input[name="contact_method"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                if (homeCallbackOptions) homeCallbackOptions.style.display = radio.value === 'Callback' ? 'block' : 'none';
+            });
+        });
+
+        // Hear about "Other" toggle
+        if (homeHearAbout) {
+            homeHearAbout.addEventListener('change', function() {
+                if (this.value === 'Other') {
+                    homeHearOtherDiv.style.display = 'block';
+                    if (homeHearOtherInput) homeHearOtherInput.setAttribute('required', 'required');
+                } else {
+                    homeHearOtherDiv.style.display = 'none';
+                    if (homeHearOtherInput) homeHearOtherInput.removeAttribute('required');
+                }
+            });
+        }
+
+        // Toast notification
+        function showToast(message, type) {
+            var existing = document.getElementById('sigToast');
+            if (existing) existing.remove();
+
+            var toast = document.createElement('div');
+            toast.id = 'sigToast';
+            toast.textContent = message;
+            toast.style.cssText = 'position:fixed;top:30px;left:50%;transform:translateX(-50%);z-index:100000;padding:16px 28px;border-radius:10px;font-weight:700;font-size:16px;box-shadow:0 4px 20px rgba(0,0,0,0.2);opacity:0;transition:opacity 0.3s ease;max-width:90%;text-align:center;';
+            toast.style.background = type === 'success' ? '#10b981' : '#ef4444';
+            toast.style.color = '#fff';
+            document.body.appendChild(toast);
+
+            // Fade in
+            setTimeout(function() { toast.style.opacity = '1'; }, 10);
+
+            // Fade out and remove after 4 seconds
+            setTimeout(function() {
+                toast.style.opacity = '0';
+                setTimeout(function() { toast.remove(); }, 300);
+            }, 4000);
+        }
+
+        // Form submit
+        var homeQuoteForm = document.getElementById('homeQuoteForm');
+        var homeQuoteFormMsg = document.getElementById('homeQuoteFormMsg');
+        if (homeQuoteForm) {
+            homeQuoteForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                var submitBtn = homeQuoteForm.querySelector('button[type="submit"]');
+                var originalBtnText = submitBtn.textContent;
+
+                // Show sending state
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+                if (homeQuoteFormMsg) homeQuoteFormMsg.style.display = 'none';
+
+                // Collect form data
+                var formData = {
+                    full_name: homeQuoteForm.querySelector('input[name="full_name"]').value,
+                    email: homeQuoteForm.querySelector('input[name="email"]').value,
+                    phone: homeQuoteForm.querySelector('input[name="phone"]').value,
+                    insurance_type: homeQuoteForm.querySelector('select[name="insurance_type"]').value,
+                    other_insurance: homeQuoteForm.querySelector('input[name="other_insurance"]') ? homeQuoteForm.querySelector('input[name="other_insurance"]').value : '',
+                    contact_method: homeQuoteForm.querySelector('input[name="contact_method"]:checked').value,
+                    callback_day: homeQuoteForm.querySelector('select[name="callback_day"]') ? homeQuoteForm.querySelector('select[name="callback_day"]').value : '',
+                    callback_time: homeQuoteForm.querySelector('select[name="callback_time"]') ? homeQuoteForm.querySelector('select[name="callback_time"]').value : '',
+                    hear_about: homeQuoteForm.querySelector('select[name="hear_about"]').value,
+                    hear_other: homeQuoteForm.querySelector('input[name="hear_other"]') ? homeQuoteForm.querySelector('input[name="hear_other"]').value : '',
+                    promo_code: homeQuoteForm.querySelector('input[name="promo_code"]').value,
+                    message: homeQuoteForm.querySelector('textarea[name="message"]').value,
+                    page: 'homepage'
+                };
+
+                // Submit to API
+                fetch('/api/lead', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                })
+                .then(function(response) { return response.json(); })
+                .then(function(data) {
+                    if (data.success) {
+                        homeQuoteForm.reset();
+                        var quoteModal = document.getElementById('quoteModal');
+                        if (quoteModal) { quoteModal.style.display = "none"; }
+                        showToast('✓ Your request has been sent! Our team will be in touch shortly.', 'success');
+                    } else {
+                        showToast(data.error || 'Something went wrong. Please try again.', 'error');
+                    }
+                })
+                .catch(function() {
+                    showToast('Network error. Please try again.', 'error');
+                })
+                .finally(function() {
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
+                });
+            });
+        }
+    </script>
+
+<style>
+    .google-rating {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+    .carrier-logo {
+        height: 180px !important;
+        width: 280px !important;
+        margin-right: 100px !important;
+        flex-shrink: 0;
+        object-fit: contain !important;
+    }
+    .product-bullets {
+        list-style: none !important;
+        padding: 0 !important;
+        margin: 15px 0 !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 8px 20px !important;
+    }
+    .product-bullets li {
+        font-size: 15px !important;
+        color: #4b5563 !important;
+        padding-left: 24px !important;
+        position: relative !important;
+        line-height: 1.4 !important;
+    }
+    .product-bullets li::before {
+        content: "✓" !important;
+        position: absolute !important;
+        left: 0 !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        width: 16px !important;
+        height: 16px !important;
+        background: var(--personal-blue) !important;
+        color: #fff !important;
+        border-radius: 50% !important;
+        font-size: 10px !important;
+        font-weight: bold !important;
+        line-height: 16px !important;
+        text-align: center !important;
+    }
+    .product-bullets-green li::before { background: var(--success-green) !important; }
+    .product-bullets-red li::before { background: var(--primary-red) !important; }
+    .product-bullets-purple li::before { background: var(--life-purple) !important; }
+    @media (max-width: 768px) {
+        .product-bullets { grid-template-columns: 1fr !important; }
+    }
+</style>
+</BaseLayout>
