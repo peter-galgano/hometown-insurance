@@ -85,8 +85,8 @@ const recentPosts = allPosts.slice(0, 3);
         <section class="container hero-index">
             <div class="hero-content">
                 <p class="hero-label"><i class="fa-solid fa-shield-halved"></i> PROTECTION SINCE 1979</p>
-                <h1>Insurance coverage for what matters most</h1>
-                <p>At Hometown Insurance Agency, our mission is to empower business leaders, families, and communities with trusted guidance and ironclad insurance protection so they can build, grow, and protect their future with confidence.</p>
+                <h1>Insurance Protection for What Matters Most</h1>
+                <p>At Hometown Insurance Agency, we provide trusted guidance and customized auto, home, and business insurance solutions to help protect your family, property, and livelihood with confidence.</p>
                 <div>
                     <a href="#" class="btn btn-red btn-pulse openQuoteTrigger">Get a Quote</a>
                     <a href="#insurance-built" class="btn btn-white" style="margin-left:15px;">View Our Products</a>
@@ -195,15 +195,15 @@ const recentPosts = allPosts.slice(0, 3);
     <!-- Insurance Built for You -->
     <section class="container" id="insurance-built" style="scroll-margin-top: 180px;">
         <div class="section-title">
-            <h2>Insurance Built for You</h2>
-            <p>At Hometown Insurance, we pride ourselves on being a <b>family-owned</b>, full-service agency. Whether you are looking for coverage for your family, your business, or your specialized professional needs, we provide a <b>comprehensive range of insurance solutions</b> tailored to every stage of life.</p>
+            <h2>Insurance Solutions Built for You</h2>
+            <p>At Hometown Insurance, we are a <b>family-owned</b>, full-service insurance agency dedicated to protecting what matters most. Whether you need coverage for your family, your business, or specialized professional needs, we offer a <b>wide range of personal, business, and specialty insurance solutions</b> tailored to every stage of life.</p>
         </div>
         <div class="product-row">
             <div class="product-img"><img src="https://static-asset.amac.us/wp-content/uploads/2026/02/05102523/home-1.jpg" alt="Personal Protection"></div>
             <div class="product-text">
                 <span class="label" style="color: var(--personal-blue);">FOR INDIVIDUALS</span>
                 <h2>Personal Protection</h2>
-                <p>Protecting your home, family, and everything you've worked hard for — with the personal care it deserves.</p>
+                <p>Protect your home, family, and assets with the personal attention you deserve. Our home, auto, and specialty insurance solutions help you safeguard your life's most valuable investments.</p>
                 <ul class="product-bullets">
                     <li>Homeowners & Renters Insurance</li>
                     <li>Auto & Motorcycle Insurance</li>
@@ -219,17 +219,33 @@ const recentPosts = allPosts.slice(0, 3);
             <div class="product-img"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Business"></div>
             <div class="product-text">
                 <span class="label" style="color: var(--success-green);">FOR BUSINESS</span>
-                <h2>Business & Commercial</h2>
-                <p>Building a business is a labor of love and a legacy for the future. We partner with you to safeguard your livelihood, your employees, and your reputation.</p>
+                <h2>Business Insurance</h2>
+                <p>Your business is your legacy. We partner with you to protect your assets, employees, and reputation with comprehensive business and commercial insurance solutions.</p>
+                <ul class="product-bullets product-bullets-green">
+                    <li>General, Professional (E&O) & Cyber Liability Options</li>
+                    <li>Directors & Officers (D&O) Coverage</li>
+                    <li>Commercial Property</li>
+                    <li>Business Interruption & Equipment Breakdown</li>
+                    <li>Commercial Auto</li>
+                    <li>Workers' Compensation Coverage</li>
+                </ul>
                 <a href="/business" class="btn btn-green">View Business Solutions</a>
             </div>
         </div>
         <div class="product-row">
-            <div class="product-img"><img src="https://static-asset.amac.us/wp-content/uploads/2026/02/05102933/firefighters.jpg" alt="Firefighter & EMS Services"></div>
+            <div class="product-img"><img src="/images/firefighter-new.jpg" alt="Firefighter & EMS Services"></div>
             <div class="product-text">
                 <span class="label" style="color: var(--primary-red);">FOR THOSE WHO SERVE</span>
                 <h2>Firefighter & EMS Services</h2>
-                <p>To our local Fire, Police, and EMS professionals: you protect our families every single day, and it is our greatest honor to protect yours.</p>
+                <p>To our volunteer local Fire and EMS professionals: you protect our community every day, and it's our honor to protect you and your family with <b>specialized insurance programs for first responders and Fire Districts</b>.</p>
+                <ul class="product-bullets product-bullets-red">
+                    <li>Fire District Package (Property & Liability)</li>
+                    <li>VFBL & Workers' Compensation</li>
+                    <li>Group Accident & Sickness</li>
+                    <li>Group Term Life Insurance</li>
+                    <li>First Responder Auto & Home Discount</li>
+                    <li>Individual Life & Health Insurance</li>
+                </ul>
                 <a href="/firefighter-ems" class="btn btn-red">Explore Hero Programs</a>
             </div>
         </div>
@@ -237,8 +253,16 @@ const recentPosts = allPosts.slice(0, 3);
             <div class="product-img"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80" alt="Life & Health"></div>
             <div class="product-text">
                 <span class="label" style="color: var(--life-purple);">FOR PERSONAL SECURITY</span>
-                <h2>Life & Health</h2>
-                <p>Health and financial security provide the foundation for a peaceful retirement and a lasting legacy. We are here to guide you with expertise and commitment.</p>
+                <h2>Life & Health Insurance</h2>
+                <p>Health and financial security are the foundation for a stable future. We guide you in selecting life, health, and retirement-focused insurance solutions that protect your family and create a lasting legacy.</p>
+                <ul class="product-bullets product-bullets-purple">
+                    <li>Life Insurance – Whole or Term</li>
+                    <li>Individual Health Coverage</li>
+                    <li>Group Health Coverage</li>
+                    <li>Voluntary Benefits: Dental & Vision, LTD</li>
+                    <li>Long-Term Care Coverage</li>
+                    <li>Disability Insurance</li>
+                </ul>
                 <a href="/life-health" class="btn btn-purple">Protect Your Future</a>
             </div>
         </div>
@@ -492,6 +516,9 @@ const recentPosts = allPosts.slice(0, 3);
         line-height: 16px !important;
         text-align: center !important;
     }
+    .product-bullets-green li::before { background: var(--success-green) !important; }
+    .product-bullets-red li::before { background: var(--primary-red) !important; }
+    .product-bullets-purple li::before { background: var(--life-purple) !important; }
     @media (max-width: 768px) {
         .product-bullets { grid-template-columns: 1fr !important; }
     }
